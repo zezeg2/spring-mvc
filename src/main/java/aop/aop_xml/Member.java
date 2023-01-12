@@ -1,4 +1,4 @@
-package org.example.aop.aop_xml;
+package aop.aop_xml;
 
 public class Member {
     public void login(String id){

@@ -1,4 +1,4 @@
-package org.example.aop.aop_xml;
+package aop.aop_xml;
 
 import java.util.ArrayList;
 import java.util.List;

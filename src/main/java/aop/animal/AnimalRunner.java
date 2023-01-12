@@ -1,4 +1,4 @@
-package org.example.aop.animal;
+package aop.animal;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

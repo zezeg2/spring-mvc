@@ -1,4 +1,4 @@
-package org.example.aop.animal;
+package aop.animal;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class AnimalAspect {
-    @Around("execution(public * org.example.aop.animal.*.*(..))")
+    @Around("execution(public * aop.animal.*.*(..))")
     public void aroundAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
         String animalName = joinPoint.getTarget().getClass().getSimpleName();
         System.out.println("점심 머먹었노? " + animalName + "려나");

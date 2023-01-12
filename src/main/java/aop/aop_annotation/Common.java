@@ -1,7 +1,9 @@
-package org.example.aop.aop_annotation;
+package aop.aop_annotation;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -10,7 +12,7 @@ import java.util.Date;
 @Aspect
 public class Common {
     long start;
-    @Pointcut("execution(public * org.example.aop.aop_annotation.*.*(..))")
+    @Pointcut("execution(public * aop.aop_annotation.*.*(..))")
     public void pointcut(){}
 //    @Before("pointcut()")
     public void a(){

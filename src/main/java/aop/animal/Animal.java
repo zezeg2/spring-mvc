@@ -1,4 +1,4 @@
-package org.example.aop.animal;
+package aop.animal;
 
 public interface Animal {
     String lunch();

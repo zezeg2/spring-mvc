@@ -1,4 +1,4 @@
-package org.example.aop.aop_xml;
+package aop.aop_xml;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
