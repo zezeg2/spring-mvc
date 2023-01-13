@@ -8,7 +8,7 @@ public class Aop1Runner {
 //        ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfiguration.class);
         ApplicationContext context = new ClassPathXmlApplicationContext("aop1.xml");
         Member member = context.getBean("member", Member.class);
-        member.insert("id",1234);
+        member.insert("id", 1234);
         member.login("id");
         member.logout();
 
