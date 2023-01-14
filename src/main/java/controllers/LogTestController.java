@@ -10,10 +10,10 @@ public class LogTestController {
     Logger logger = LoggerFactory.getLogger(getClass());
     @GetMapping("/test")
     public void test(){
-        logger.info("info");
-        logger.trace("info");
-        logger.debug("info");
-        logger.warn("info");
-        logger.error("info");
+        logger.info("info level log");
+        logger.trace("trace level log");
+        logger.debug("debug level log");
+        logger.warn("warn level log");
+        logger.error("error level log");
     }
 }
