@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="domains.member.dtos.MemberDTO">
+    <select id="isExistId" parameterType="string" resultType="boolean">SELECT EXISTS(SELECT 1 FROM member WHERE id = #{id})</select>
+    <select id="isExistEmail" parameterType="string" resultType="boolean">SELECT EXISTS(SELECT 1 FROM member WHERE email = #{email})</select>
+    <select id="getMember" parameterType="string" resultType="memberDto">select *
+                                                  from member
+                                                  where id = #{id}</select>
+    <select id="getMemberByPage" parameterType="map" resultType="memberDto">
+        select *
+        from member limit #{limit}
+        offset ${offset}
+    </select>
+    <select id="memberList" resultType="memberDto">select *
+                                                   from member</select>
+    <select id="memberCount" resultType="int">select count(*)
+                                              from member</select>
+    <insert id="createMember"
+            parameterType="memberDto">INSERT INTO member (#{id}, #{pw}, #{name}, #{email}, #{phone}, #{address}, now() )</insert>
+    <update id="updateMember" parameterType="updateMemberDto">UPDATE member
+                                                              SET pw      = #{pw},
+                                                                  email   = #{email},
+                                                                  phone   = #{phone},
+                                                                  address = #{address}
+                                                              WHERE id = #{id}</update>
+    <delete id="deleteMember" parameterType="string">DELETE
+                                                  FROM member
+                                                  WHERE id = #{id}</delete>
+    <resultMap id="memberBoardMap" type="hashmap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="title" column="title"/>
+        <result property="contents" column="contents"/>
+        <result property="writingtime" column="writingtime"/>
+    </resultMap>
+    <select id="memberBoard" resultMap="memberBoardMap" parameterType="string">
+        select id, name, ifnull(title, '글없음') as title, contents, ifnull(writingtime, '몰라임마') as writingtime
+        from member m
+                 left outer join board b on m.id = b.writer
+        where id = #{id};
+    </select>
+
+    <select id="isExistBoard" parameterType="string" resultType="boolean">SELECT EXISTS(SELECT 1 FROM board WHERE writer = #{id})</select>
+</mapper>

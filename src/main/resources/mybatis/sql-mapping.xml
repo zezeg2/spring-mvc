@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="domains.member.dtos.MemberDTO">
+    <!-- member테이블 컬럼명 === memberDto클래스 변수명저장 -->
+    <select id="memberlist" resultType="memberDto">
+        select *
+        from member
+    </select>
+
+    <select id="membercount" resultType="int">
+        select count(*)
+        from member
+    </select>
+
+    <select id="onemember" resultType="memberDto" parameterType="String">
+        select *
+        from member
+        where id = #{a}
+    </select>
+
+    <select id="paginglist" resultType="memberDto" parameterType="int[]">
+        select * from member order by indate desc limit
+        <foreach collection="array" item="num" separator=",">
+            #{num}
+        </foreach>
+    </select>
+
+    <insert id="insertmember" parameterType="memberDto">
+        insert into member
+        values (#{id}, #{pw}, #{name}, #{phone}, #{email}, #{address}, now())
+    </insert>
+
+    <update id="updatemember" parameterType="memberDto">
+        update member
+        set name =#{name},
+            email=#{email},
+            phone=#{phone}
+        where id = #{id}
+    </update>
+
+    <delete id="deletemember" parameterType="String">
+        delete
+        from member
+        where id=#{a}
+    </delete>
+
+    <!-- session.selectList("searchmember", map); -->
+    <select id="searchmember" resultType="memberDto" parameterType="HashMap">
+        select *
+        from member
+        where #{colname} like #{colvalue}
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

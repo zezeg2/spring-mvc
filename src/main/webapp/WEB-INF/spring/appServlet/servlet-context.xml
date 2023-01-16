@@ -21,6 +21,7 @@
     <context:component-scan base-package="controllers"/>
     <context:component-scan base-package="services"/>
     <context:component-scan base-package="daos"/>
+<!--    <context:component-scan base-package="configurations"/>-->
 
     <!-- Mapping 하나씩만 늘려주면 됨! -->
     <!-- spring controllers 환경에서는 <beans:bean 으로 사용 -->
