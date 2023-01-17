@@ -19,5 +19,13 @@
     <title>Title</title>
 </head>
 <body>
+<h2>index 페이지</h2>
+<h3>
+    <ul>
+        <li><a href="<%= request.getContextPath()%>/login">로그인</a></li>
+        <li><a href="<%= request.getContextPath()%>/member-list?page=1">회원 전체 조회(로그인 필요없음)</a></li>
+        <li><a href="<%= request.getContextPath()%>/register">회원가입(로그인 필요없음)</a></li>
+    </ul>
+</h3>
 </body>
 </html>

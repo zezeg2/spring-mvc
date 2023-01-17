@@ -7,7 +7,7 @@
   <title>register.jsp</title>
 </head>
 <body>
-<h1>회원가입 폼</h1>
+<h1>회원가입</h1>
 <form action="<%=request.getContextPath() %>/register"  method="post">
   아이디: <input type="text" name="id"><br>
   암호: <input type="password" name="pw"><br>

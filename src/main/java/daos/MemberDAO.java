@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
  public interface MemberDAO {
-    int COUNT_PER_PAGE = 3;
+    int COUNT_PER_PAGE = 4;
      boolean isExistId(String id) throws SQLException;
 
      boolean isExistEmail(String email) throws SQLException;

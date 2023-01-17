@@ -14,7 +14,7 @@ import java.io.IOException;
 //@ComponentScan("configurations")
 @ComponentScans({@ComponentScan("configurations"), @ComponentScan("daos"), @ComponentScan("services"), @ComponentScan("controllers")})
 public class ApplicationConfig {
-    @Bean
+    @Bean("sqlSessionFactoryByManualInjection")
     public SqlSessionFactory sqlSessionFactory() throws IOException {
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         return builder.build(Resources.getResourceAsReader("mybatis/mybatis-config.xml"));

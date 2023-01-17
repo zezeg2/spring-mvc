@@ -6,7 +6,9 @@ import domains.member.dtos.MemberInfoDTO;
 import domains.member.dtos.UpdateMemberDTO;
 import exceptions.IncorrectPasswordException;
 import exceptions.MemberNotFoundException;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -16,7 +18,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Component
+@Lazy
+@Repository
 public class JDBCMemberDAOImpl implements MemberDAO {
     private final int COUNT_PER_PAGE = 3;
     private static DataSource source = getSource();

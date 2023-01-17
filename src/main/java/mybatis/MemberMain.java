@@ -1,17 +1,15 @@
 package mybatis;
 
-import configurations.ApplicationConfig;
 import daos.MemberDAO;
 import daos.MybatisMemberDAOImpl;
 import domains.member.dtos.AuthMemberDTO;
 import domains.member.dtos.MemberInfoDTO;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import services.MemberService;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
 
 public class MemberMain {
@@ -23,7 +21,8 @@ public class MemberMain {
          *  JNDI가 초기화되지 않아서 발생하는 것 같다. 실제로 WAS를 켜서 실제 서비스에서 DB 연동이 되는지 확인해보니
          *  제대로 작동하는 걸 확인할 수 있었다.
          */
-        ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+//        ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+        ApplicationContext context = new ClassPathXmlApplicationContext("mybatis/spring-mybatis.xml");
 
         MemberDAO dao = context.getBean("mybatisMemberDAOImpl", MybatisMemberDAOImpl.class);
         MemberService service = context.getBean("memberService", MemberService.class);

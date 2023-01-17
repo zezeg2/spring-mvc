@@ -9,7 +9,6 @@ import exceptions.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
@@ -19,37 +18,33 @@ import java.util.Map;
 
 @Repository
 @RequiredArgsConstructor
-public class MybatisMemberDAOImpl implements MemberDAO {
+public class SpringMybatisMemberDAOImpl implements MemberDAO {
 
-    private final SqlSessionFactory sqlSessionFactoryByManualInjection;
-
-    private SqlSession getSession() {
-        return sqlSessionFactoryByManualInjection.openSession(true);
-    }
-
+    private final SqlSession sqlSession;
+    
     @Override
     public boolean isExistId(String id) throws SQLException {
-        return getSession().selectOne("isExistId", id);
+        return sqlSession.selectOne("isExistId", id);
     }
 
     @Override
     public boolean isExistEmail(String email) throws SQLException {
-        return getSession().selectOne("isExistEmail", email);
+        return sqlSession.selectOne("isExistEmail", email);
     }
 
     @Override
     public void createMember(MemberDTO dto) throws SQLException {
-        getSession().insert("createMember", dto);
+        sqlSession.insert("createMember", dto);
     }
 
     @Override
     public int countPage() throws SQLException {
-        return getSession().selectOne("memberCount");
+        return (Integer) sqlSession.selectOne("memberCount") / COUNT_PER_PAGE + 1;
     }
 
     @Override
     public List<MemberInfoDTO> getAllMemberInfo(int page) throws SQLException {
-        return getSession()
+        return sqlSession
                 .selectList("getMemberByPage", Map.of("limit", COUNT_PER_PAGE, "offset", COUNT_PER_PAGE * (page - 1)))
                 .stream().map(o -> ((MemberDTO) o).toInfoDto()).toList();
     }
@@ -61,18 +56,17 @@ public class MybatisMemberDAOImpl implements MemberDAO {
 
     @Override
     public void updateMember(UpdateMemberDTO dto) throws SQLException {
-        getSession().update("updateMember", dto);
+        sqlSession.update("updateMember", dto);
     }
 
     @Override
     public void deleteMember(String id) throws SQLException {
-        getSession().delete("deleteMember", id);
-        getSession().commit();
+        sqlSession.delete("deleteMember", id);
     }
 
     @Override
     public MemberDTO getMember(AuthMemberDTO dto) throws SQLException {
-        SqlSession session = getSession();
+        SqlSession session = sqlSession;
         MemberDTO match = session.selectOne("getMember", dto.id());
         if (match == null) throw new MemberNotFoundException();
         if (!match.pw().equals(dto.pw())) throw new IncorrectPasswordException();
@@ -81,10 +75,10 @@ public class MybatisMemberDAOImpl implements MemberDAO {
 
 
     public List<HashMap<String, String>> getMemberBoardMap(String id){
-        return getSession().selectList("memberBoard", id);
+        return sqlSession.selectList("memberBoard", id);
     }
     @Override
     public boolean isExistBoard(String id) {
-        return getSession().selectOne("isExistBoard",id);
+        return sqlSession.selectOne("isExistBoard",id);
     }
 }

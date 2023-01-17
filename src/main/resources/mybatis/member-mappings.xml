@@ -17,7 +17,7 @@
     <select id="memberCount" resultType="int">select count(*)
                                               from member</select>
     <insert id="createMember"
-            parameterType="memberDto">INSERT INTO member (#{id}, #{pw}, #{name}, #{email}, #{phone}, #{address}, now() )</insert>
+            parameterType="memberDto">INSERT INTO member(id, pw, name, email, phone, address, indate) values ( #{id}, #{pw}, #{name}, #{email}, #{phone}, #{address}, now() )</insert>
     <update id="updateMember" parameterType="updateMemberDto">UPDATE member
                                                               SET pw      = #{pw},
                                                                   email   = #{email},

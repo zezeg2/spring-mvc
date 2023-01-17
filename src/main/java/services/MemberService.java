@@ -4,16 +4,21 @@ import daos.MemberDAO;
 import domains.member.dtos.AuthMemberDTO;
 import domains.member.dtos.MemberDTO;
 import domains.member.dtos.MemberInfoDTO;
+import domains.member.dtos.UpdateMemberDTO;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 @Service
 public class MemberService {
     private final MemberDAO dao;
-    public MemberService(@Qualifier("mybatisMemberDAOImpl")MemberDAO dao) {
+//    public MemberService(@Qualifier("mybatisMemberDAOImpl")MemberDAO dao) {
+//        this.dao = dao;
+//    }
+    public MemberService(@Qualifier("springMybatisMemberDAOImpl")MemberDAO dao) {
         this.dao = dao;
     }
 
@@ -26,6 +31,30 @@ public class MemberService {
         if (dao.isExistId(info.id()) || dao.isExistEmail(info.email())) return null;
         dao.createMember(info);
         return dao.getMemberInfo(new AuthMemberDTO(info.id(), info.pw()));
+    }
+
+    public List<MemberInfoDTO> getMemberListByPage(int page) throws SQLException {
+        return dao.getAllMemberInfo(page);
+    }
+
+    public MemberInfoDTO getMemberInfo(AuthMemberDTO auth) throws SQLException {
+        return dao.getMemberInfo(auth);
+    }
+
+    public void updateMember(UpdateMemberDTO updateMemberDTO) throws SQLException {
+        dao.updateMember(updateMemberDTO);
+    }
+
+    public void deleteMember(AuthMemberDTO auth) throws SQLException {
+        dao.deleteMember(auth.id());
+    }
+
+    public MemberDTO getMember(AuthMemberDTO auth) throws SQLException {
+        return dao.getMember(auth);
+    }
+
+    public int getTotalPage() throws SQLException {
+        return dao.countPage();
     }
 
     public void deleteMemberWithBoard() throws SQLException {
@@ -48,6 +77,5 @@ public class MemberService {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 }
