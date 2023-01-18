@@ -9,7 +9,6 @@ import exceptions.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
@@ -86,5 +85,10 @@ public class MybatisMemberDAOImpl implements MemberDAO {
     @Override
     public boolean isExistBoard(String id) {
         return getSession().selectOne("isExistBoard",id);
+    }
+
+    @Override
+    public List<MemberDTO> getMemberList() {
+        return null;
     }
 }

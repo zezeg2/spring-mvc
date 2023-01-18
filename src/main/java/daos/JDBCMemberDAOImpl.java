@@ -7,7 +7,6 @@ import domains.member.dtos.UpdateMemberDTO;
 import exceptions.IncorrectPasswordException;
 import exceptions.MemberNotFoundException;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.naming.Context;
@@ -171,6 +170,11 @@ public class JDBCMemberDAOImpl implements MemberDAO {
     @Override
     public boolean isExistBoard(String id) {
         return true;
+    }
+
+    @Override
+    public List<MemberDTO> getMemberList() {
+        return null;
     }
 
 

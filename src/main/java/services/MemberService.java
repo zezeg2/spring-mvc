@@ -78,4 +78,8 @@ public class MemberService {
             System.out.println(e.getMessage());
         }
     }
+
+    public List<MemberInfoDTO> getAllMember(){
+        return dao.getMemberList().stream().map(m -> m.toInfoDto()).toList();
+    }
 }

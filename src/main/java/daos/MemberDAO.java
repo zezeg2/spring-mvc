@@ -36,4 +36,6 @@ import java.util.List;
      MemberDTO getMember(AuthMemberDTO dto) throws SQLException ;
 
      boolean isExistBoard(String id);
+
+     List<MemberDTO> getMemberList();
  }

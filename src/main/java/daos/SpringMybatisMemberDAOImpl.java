@@ -8,7 +8,6 @@ import exceptions.IncorrectPasswordException;
 import exceptions.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
@@ -80,5 +79,10 @@ public class SpringMybatisMemberDAOImpl implements MemberDAO {
     @Override
     public boolean isExistBoard(String id) {
         return sqlSession.selectOne("isExistBoard",id);
+    }
+
+    @Override
+    public List<MemberDTO> getMemberList() {
+        return sqlSession.selectList("memberList");
     }
 }

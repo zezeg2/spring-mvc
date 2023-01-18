@@ -11,6 +11,8 @@
 
     <!-- Enables the Spring MVC @Controller programming model -->
     <annotation-driven/>
+    <resources mapping="/upload/**" location="resources/uploads"/>
+    <resources mapping="/resources/**" location="resources/"/>
 
     <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
     <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -18,10 +20,14 @@
         <beans:property name="suffix" value=".jsp"/>
     </beans:bean>
 
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+
     <context:component-scan base-package="controllers"/>
     <context:component-scan base-package="services"/>
     <context:component-scan base-package="daos"/>
+    <context:component-scan base-package="uploads"/>
 <!--    <context:component-scan base-package="configurations"/>-->
+
 
     <!-- Mapping 하나씩만 늘려주면 됨! -->
     <!-- spring controllers 환경에서는 <beans:bean 으로 사용 -->
