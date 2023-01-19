@@ -11,7 +11,7 @@
 
     <!-- Enables the Spring MVC @Controller programming model -->
     <annotation-driven/>
-    <resources mapping="/upload/**" location="resources/uploads"/>
+    <resources mapping="/uploads/**" location="file:///c:/Users/user/uploads"/>
     <resources mapping="/resources/**" location="resources/"/>
 
     <!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->

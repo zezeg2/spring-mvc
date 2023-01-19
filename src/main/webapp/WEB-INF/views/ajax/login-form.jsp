@@ -61,8 +61,23 @@
         }
       });
     })
-    $("#page-list-btn").on('click', () => {
-      totalPage =
+    $("#upload-button").on('click', () => {
+      let formData = new FormData($("#upload-form")[0]);
+      $.ajax({
+        url: 'upload',
+        type: 'post',
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        success: (data) => {
+          $("#upload-result").html(data)
+        },
+        error: (data) => {
+          $("#upload-result").html("업로드 실패")
+        }
+      });
     })
   });
 </script>
@@ -79,6 +94,12 @@
     패스워드 : <input type="password" id="pw" name="pw">
     <input type="button" id="login" value="login">
 </form>
+
+<form id="upload-form">
+    업로드 파일 : <input type="file" id="file-input">
+    <input type="button" id="upload-button" value="파일 업로드">
+</form>
+<div id="upload-result"></div>
 
 <button id="info-btn">info</button>
 <button id="list-btn">list</button>
